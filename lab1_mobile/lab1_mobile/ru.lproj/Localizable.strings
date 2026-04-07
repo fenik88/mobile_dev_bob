@@ -1,0 +1,48 @@
+/* Splash */
+"splash_subtitle" = "Учите слова с карточками";
+
+/* Tabs */
+"tab_cards" = "Карточки";
+"tab_settings" = "Настройки";
+
+/* Empty state */
+"empty_state" = "Карточек пока нет. Нажмите + чтобы добавить!";
+
+/* Search */
+"search_placeholder" = "Поиск слов...";
+
+/* Add / Edit card */
+"add_card_title" = "Новая карточка";
+"edit_card_title" = "Редактировать";
+"section_word" = "Слово";
+"section_example" = "Пример";
+"field_word" = "Слово";
+"field_translation" = "Перевод";
+"field_example" = "Пример предложения (необязательно)";
+
+/* Buttons */
+"cancel" = "Отмена";
+"save" = "Сохранить";
+"edit" = "Редактировать";
+
+/* Detail view */
+"label_word" = "Слово";
+"label_translation" = "Перевод";
+"tap_to_flip" = "Нажмите на карточку, чтобы перевернуть";
+"mark_learned" = "Выучено";
+"added_date" = "Добавлено: %@";
+
+/* Settings */
+"settings_appearance" = "Внешний вид";
+"settings_theme" = "Тема";
+"theme_system" = "Системная";
+"theme_light" = "Светлая";
+"theme_dark" = "Тёмная";
+"settings_about" = "О приложении";
+"about_app" = "Приложение";
+"about_version" = "Версия";
+
+/* Network */
+"offline_mode" = "Офлайн";
+"offline_no_cache" = "Нет интернета и кэша для этого слова";
+"lookup_loading" = "Ищем определение...";

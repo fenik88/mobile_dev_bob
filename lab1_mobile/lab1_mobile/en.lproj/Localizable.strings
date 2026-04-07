@@ -1,0 +1,48 @@
+/* Splash */
+"splash_subtitle" = "Learn words with flash cards";
+
+/* Tabs */
+"tab_cards" = "Cards";
+"tab_settings" = "Settings";
+
+/* Empty state */
+"empty_state" = "No cards yet. Tap + to add one!";
+
+/* Search */
+"search_placeholder" = "Search words...";
+
+/* Add / Edit card */
+"add_card_title" = "New Card";
+"edit_card_title" = "Edit Card";
+"section_word" = "Word";
+"section_example" = "Example";
+"field_word" = "Word";
+"field_translation" = "Translation";
+"field_example" = "Example sentence (optional)";
+
+/* Buttons */
+"cancel" = "Cancel";
+"save" = "Save";
+"edit" = "Edit";
+
+/* Detail view */
+"label_word" = "Word";
+"label_translation" = "Translation";
+"tap_to_flip" = "Tap card to flip";
+"mark_learned" = "Learned";
+"added_date" = "Added: %@";
+
+/* Settings */
+"settings_appearance" = "Appearance";
+"settings_theme" = "Theme";
+"theme_system" = "System";
+"theme_light" = "Light";
+"theme_dark" = "Dark";
+"settings_about" = "About";
+"about_app" = "Application";
+"about_version" = "Version";
+
+/* Network */
+"offline_mode" = "Offline";
+"offline_no_cache" = "No internet and no cached data for this word";
+"lookup_loading" = "Looking up definition...";
