@@ -8,6 +8,7 @@ struct CardDetailView: View {
     @State private var isEditing = false
     @State private var editWord = ""
     @State private var editTranslation = ""
+    @State private var editDefinition = ""
     @State private var editExample = ""
     @State private var showTranslation = false
 
@@ -15,13 +16,14 @@ struct CardDetailView: View {
         ScrollView {
             VStack(spacing: 24) {
 
-                // Flip card
+                // MARK: - Карточка (переворачивается по тапу)
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(.secondarySystemBackground))
                         .shadow(radius: 6)
 
                     VStack(spacing: 12) {
+                        // показываем слово или перевод в зависимости от showTranslation
                         Text(showTranslation ? card.translation : card.word)
                             .font(.system(size: 32, weight: .bold, design: .rounded))
                             .multilineTextAlignment(.center)
@@ -45,7 +47,21 @@ struct CardDetailView: View {
                     .font(.caption)
                     .foregroundStyle(.tertiary)
 
-                // Example
+                // MARK: - Definition из словаря
+                if !card.definition.isEmpty {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(NSLocalizedString("section_definition", comment: ""))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .textCase(.uppercase)
+                        Text(card.definition)
+                            .font(.body)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                }
+
+                // MARK: - Пример от пользователя
                 if !card.example.isEmpty {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(NSLocalizedString("section_example", comment: ""))
@@ -59,7 +75,7 @@ struct CardDetailView: View {
                     .padding(.horizontal)
                 }
 
-                // Learned toggle
+                // MARK: - Тоггл "выучено"
                 Toggle(isOn: Binding(
                     get: { card.isLearned },
                     set: { _ in store.toggleLearned(card) }
@@ -68,7 +84,7 @@ struct CardDetailView: View {
                 }
                 .padding(.horizontal)
 
-                // Date
+                // MARK: - Дата добавления
                 Text(String(format: NSLocalizedString("added_date", comment: ""),
                             card.createdAt.formatted(date: .long, time: .omitted)))
                     .font(.caption)
@@ -82,23 +98,29 @@ struct CardDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(NSLocalizedString("edit", comment: "")) {
-                    editWord = card.word
+                    // копируем значения в edit-поля перед открытием редактора
+                    editWord        = card.word
                     editTranslation = card.translation
-                    editExample = card.example
+                    editDefinition  = card.definition
+                    editExample     = card.example
                     isEditing = true
                 }
             }
         }
         .sheet(isPresented: $isEditing) {
             EditCardSheet(
-                word: $editWord,
+                word:        $editWord,
                 translation: $editTranslation,
-                example: $editExample,
+                definition:  $editDefinition,
+                example:     $editExample,
                 onSave: {
-                    store.update(card,
-                                 word: editWord.trimmingCharacters(in: .whitespaces),
-                                 translation: editTranslation.trimmingCharacters(in: .whitespaces),
-                                 example: editExample.trimmingCharacters(in: .whitespaces))
+                    store.update(
+                        card,
+                        word:        editWord.trimmingCharacters(in: .whitespaces),
+                        translation: editTranslation.trimmingCharacters(in: .whitespaces),
+                        definition:  editDefinition.trimmingCharacters(in: .whitespaces),
+                        example:     editExample.trimmingCharacters(in: .whitespaces)
+                    )
                     isEditing = false
                 },
                 onCancel: { isEditing = false }
@@ -107,9 +129,11 @@ struct CardDetailView: View {
     }
 }
 
+// MARK: - Лист редактирования
 struct EditCardSheet: View {
     @Binding var word: String
     @Binding var translation: String
+    @Binding var definition: String
     @Binding var example: String
     var onSave: () -> Void
     var onCancel: () -> Void
@@ -126,6 +150,15 @@ struct EditCardSheet: View {
                     TextField(NSLocalizedString("field_word", comment: ""), text: $word)
                     TextField(NSLocalizedString("field_translation", comment: ""), text: $translation)
                 }
+
+                // definition редактируем отдельно
+                if !definition.isEmpty {
+                    Section(header: Text(NSLocalizedString("section_definition", comment: ""))) {
+                        TextField(NSLocalizedString("field_definition", comment: ""), text: $definition, axis: .vertical)
+                            .lineLimit(2...6)
+                    }
+                }
+
                 Section(header: Text(NSLocalizedString("section_example", comment: ""))) {
                     TextField(NSLocalizedString("field_example", comment: ""), text: $example, axis: .vertical)
                         .lineLimit(3...6)

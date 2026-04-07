@@ -12,15 +12,19 @@ class CardStore: ObservableObject {
     init() {
         load()
     }
-    func add(word: String, translation: String, example: String) {
-        let card = WordCard(word: word, translation: translation, example: example)
+
+    // добавляем карточку — теперь передаём и definition
+    func add(word: String, translation: String, definition: String = "", example: String = "") {
+        let card = WordCard(word: word, translation: translation, definition: definition, example: example)
         cards.insert(card, at: 0)
         save()
     }
 
-    func update(_ card: WordCard, word: String, translation: String, example: String) {
+    // обновляем карточку — тоже с definition
+    func update(_ card: WordCard, word: String, translation: String, definition: String, example: String) {
         card.word = word
         card.translation = translation
+        card.definition = definition
         card.example = example
         objectWillChange.send()
         save()
@@ -38,18 +42,18 @@ class CardStore: ObservableObject {
     }
 
     func delete(card: WordCard) {
-        cards.removeAll {$0.id == card.id}
+        cards.removeAll { $0.id == card.id }
         save()
     }
 
-// сохраняю в json
+    // сохраняю в json
     private func save() {
         if let data = try? JSONEncoder().encode(cards) {
             UserDefaults.standard.set(data, forKey: saveKey)
         }
     }
 
-    //  загрузка из json формата
+    // загрузка из json формата
     private func load() {
         guard let data = UserDefaults.standard.data(forKey: saveKey),
               let saved = try? JSONDecoder().decode([WordCard].self, from: data) else { return }

@@ -15,10 +15,14 @@
 "add_card_title" = "Новая карточка";
 "edit_card_title" = "Редактировать";
 "section_word" = "Слово";
+"section_definition" = "Определение";
 "section_example" = "Пример";
 "field_word" = "Слово";
 "field_translation" = "Перевод";
-"field_example" = "Пример предложения (необязательно)";
+"field_definition" = "Определение из словаря";
+"field_example" = "Ваш пример использования";
+"picker_definition" = "Определение";
+"picker_example" = "Мой пример";
 
 /* Buttons */
 "cancel" = "Отмена";
@@ -45,4 +49,4 @@
 /* Network */
 "offline_mode" = "Офлайн";
 "offline_no_cache" = "Нет интернета и кэша для этого слова";
-"lookup_loading" = "Ищем определение...";
+"lookup_loading" = "Ищем...";

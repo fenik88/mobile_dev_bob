@@ -15,10 +15,14 @@
 "add_card_title" = "New Card";
 "edit_card_title" = "Edit Card";
 "section_word" = "Word";
+"section_definition" = "Definition";
 "section_example" = "Example";
 "field_word" = "Word";
 "field_translation" = "Translation";
-"field_example" = "Example sentence (optional)";
+"field_definition" = "Definition from dictionary";
+"field_example" = "Your example sentence";
+"picker_definition" = "Definition";
+"picker_example" = "My example";
 
 /* Buttons */
 "cancel" = "Cancel";
@@ -45,4 +49,4 @@
 /* Network */
 "offline_mode" = "Offline";
 "offline_no_cache" = "No internet and no cached data for this word";
-"lookup_loading" = "Looking up definition...";
+"lookup_loading" = "Looking up...";
