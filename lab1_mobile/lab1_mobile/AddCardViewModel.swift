@@ -2,7 +2,7 @@
 import Foundation
 import Combine
 
-@MainActor
+@MainActor // работа в основном потоке
 final class AddCardViewModel: ObservableObject {
     @Published var word: String = ""
     @Published var translation: String = ""

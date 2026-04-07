@@ -1,6 +1,5 @@
 import Foundation
 
-//одна карточка
 class WordCard: Identifiable, ObservableObject, Codable { //свой id, изменяемый, для json
     var id: UUID
     //паблишд для автоперерисовки

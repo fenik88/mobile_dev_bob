@@ -73,7 +73,7 @@ final class DictionaryService {
         return result
     }
 
-    // гет запрос к апишке словаря — транскрипция и definition
+    // гет запрос к апишке словаря
     private func fetchDictionary(word: String) async -> (definition: String, phonetic: String)? {
         guard let url = URL(string: "https://api.dictionaryapi.dev/api/v2/entries/en/\(word)") else { return nil }
 
@@ -95,12 +95,12 @@ final class DictionaryService {
         }
     }
 
-    // перевод через неофициальный эндпоинт Google Translate — без ключа, работает хорошо
+    // перевод через неофициальный эндпоинт Google Translate
     private func fetchTranslation(word: String) async -> String? {
         // кодируем слово для URL
         guard let encoded = word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
 
-        // неофициальный Google Translate API — тот же что использует расширение gtranslate
+        // неофициальный Google Translate API
         let urlString = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ru&dt=t&q=\(encoded)"
         guard let url = URL(string: urlString) else { return nil }
 
@@ -108,8 +108,8 @@ final class DictionaryService {
             let (data, response) = try await URLSession.shared.data(from: url)
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { return nil }
 
-            // ответ приходит как вложенный массив JSON: [[[перевод, оригинал, ...],...],...]
-            // парсим вручную через JSONSerialization — структура слишком нестандартная для Codable
+            // ответ приходит как вложенный массив JSON
+            // парсим вручную через JSONSerialization
             guard let json = try? JSONSerialization.jsonObject(with: data) as? [Any],
                   let firstBlock = json.first as? [Any] else { return nil }
 
@@ -129,8 +129,6 @@ final class DictionaryService {
         }
     }
 }
-
-// MARK: - Codable структуры для кэша
 
 private struct CachedEntry: Codable {
     let definition: String
