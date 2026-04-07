@@ -5,40 +5,38 @@ import Combine
 @MainActor
 final class AddCardViewModel: ObservableObject {
     @Published var word: String = ""
-    @Published var translation: String = ""   // перевод на русский — заполняется из API
-    @Published var definition: String = ""    // английское определение из API
-    @Published var example: String = ""       // пример от пользователя (вводит сам)
-    @Published var phonetic: String = ""      // транскрипция /kæt/
+    @Published var translation: String = ""
+    @Published var definition: String = ""
+    @Published var example: String = ""
+    @Published var phonetic: String = ""
     @Published var isLookingUp: Bool = false
     @Published var lookupError: String? = nil
 
-    // пользователь выбирает что хранить в третьем поле — definition из API или свой пример
-    // true = показываем definition из API, false = пользователь пишет свой example
+    // пользователь выбирает что хранить в третьем поле  definition из API или свой пример
     @Published var useDefinition: Bool = true
 
-    // флаг — пользователь вручную редактировал поле перевода
-    // если true — не перезаписываем перевод из API автоматически
+    // если пользователь вручную редактировал поле перевода не перезаписываем
     var userEditedTranslation: Bool = false
 
-    // задача поиска — храним чтобы отменять при новом вводе
+    // задача поиска: храним чтобы отменять при новом вводе
     private var lookupTask: Task<Void, Never>?
 
-    // валидация — слово и перевод обязательны
+    // валидация слово и перевод обязательны
     var isValid: Bool {
         !word.trimmingCharacters(in: .whitespaces).isEmpty &&
         !translation.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
-    // вызывается при каждом изменении поля "слово"
+    // вызывается при каждом изменении поля
     func onWordChanged(isConnected: Bool) {
-        // отменяем предыдущий поиск (дебаунс)
+        // отменяем предыдущий поиск
         lookupTask?.cancel()
         phonetic = ""
         definition = ""
         lookupError = nil
 
-        // при смене слова сбрасываем флаг ручного редактирования —
-        // раз слово новое, перевод тоже должен подтянуться из API заново
+        // при смене слова сбрасываем флаг ручного редактирования
+        // перевод тоже должен подтянуться из апишки
         userEditedTranslation = false
         translation = ""
 
@@ -46,8 +44,8 @@ final class AddCardViewModel: ObservableObject {
         guard trimmed.count >= 2 else { return }
 
         lookupTask = Task {
-            // debounce — ждём 0.7 сек тишины перед запросом
-            try? await Task.sleep(nanoseconds: 700_000_000)
+            // ждём 0.7 сек тишины перед запросом
+            try? await Task.sleep(nanoseconds: 700000000)
             guard !Task.isCancelled else { return }
 
             if !isConnected {
