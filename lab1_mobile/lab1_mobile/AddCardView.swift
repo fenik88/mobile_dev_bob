@@ -11,11 +11,8 @@ struct AddCardView: View {
     var body: some View {
         NavigationStack {
             Form {
-
-                // MARK: - Секция слова
                 Section(header: Text(NSLocalizedString("section_word", comment: ""))) {
-
-                    // поле ввода слова — при изменении запускает поиск в API
+                    // поле ввода слова
                     TextField(NSLocalizedString("field_word", comment: ""), text: $vm.word)
                         .autocorrectionDisabled()
                         .onChange(of: vm.word) {
@@ -38,8 +35,8 @@ struct AddCardView: View {
                             .foregroundStyle(.blue)
                     }
 
-                    // поле перевода — заполняется из API, можно редактировать вручную
-                    // если пользователь редактирует сам — API больше не перезаписывает
+                    // поле перевода заполняется из API, можно редактировать вручную
+                    // если пользователь редактирует сам API больше не перезаписывает
                     TextField(NSLocalizedString("field_translation", comment: ""), text: $vm.translation, axis: .vertical)
                         .lineLimit(1...3)
                         .onChange(of: vm.translation) {
@@ -51,7 +48,6 @@ struct AddCardView: View {
                         }
                 }
 
-                // MARK: - Секция definition / example
                 Section {
                     // переключатель: definition из API или свой пример
                     Picker("", selection: $vm.useDefinition) {
@@ -83,8 +79,6 @@ struct AddCardView: View {
                          ? NSLocalizedString("section_definition", comment: "")
                          : NSLocalizedString("section_example", comment: ""))
                 }
-
-                // MARK: - Статус сети
                 if !network.isConnected {
                     Section {
                         HStack(spacing: 8) {
@@ -97,7 +91,6 @@ struct AddCardView: View {
                     }
                 }
 
-                // MARK: - Ошибка поиска
                 if let error = vm.lookupError {
                     Section {
                         Text(error)

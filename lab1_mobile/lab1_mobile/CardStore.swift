@@ -2,6 +2,7 @@
 import Foundation
 import Combine
 
+// синглтончик
 class CardStore: ObservableObject {
     static let shared = CardStore()
 
@@ -13,14 +14,14 @@ class CardStore: ObservableObject {
         load()
     }
 
-    // добавляем карточку — теперь передаём и definition
+    // добавляем карточку передаем и definition
     func add(word: String, translation: String, definition: String = "", example: String = "") {
         let card = WordCard(word: word, translation: translation, definition: definition, example: example)
         cards.insert(card, at: 0)
         save()
     }
 
-    // обновляем карточку — тоже с definition
+    // обновляем карточку тоже с definition
     func update(_ card: WordCard, word: String, translation: String, definition: String, example: String) {
         card.word = word
         card.translation = translation

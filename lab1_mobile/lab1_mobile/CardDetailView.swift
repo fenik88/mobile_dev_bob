@@ -16,7 +16,7 @@ struct CardDetailView: View {
         ScrollView {
             VStack(spacing: 24) {
 
-                // MARK: - Карточка (переворачивается по тапу)
+                // переворот по тапу
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color(.secondarySystemBackground))
@@ -47,7 +47,7 @@ struct CardDetailView: View {
                     .font(.caption)
                     .foregroundStyle(.tertiary)
 
-                // MARK: - Definition из словаря
+                // определение
                 if !card.definition.isEmpty {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(NSLocalizedString("section_definition", comment: ""))
@@ -61,7 +61,7 @@ struct CardDetailView: View {
                     .padding(.horizontal)
                 }
 
-                // MARK: - Пример от пользователя
+//  пример
                 if !card.example.isEmpty {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(NSLocalizedString("section_example", comment: ""))
@@ -75,7 +75,7 @@ struct CardDetailView: View {
                     .padding(.horizontal)
                 }
 
-                // MARK: - Тоггл "выучено"
+                // выучено
                 Toggle(isOn: Binding(
                     get: { card.isLearned },
                     set: { _ in store.toggleLearned(card) }
@@ -84,7 +84,7 @@ struct CardDetailView: View {
                 }
                 .padding(.horizontal)
 
-                // MARK: - Дата добавления
+                // дата добавления
                 Text(String(format: NSLocalizedString("added_date", comment: ""),
                             card.createdAt.formatted(date: .long, time: .omitted)))
                     .font(.caption)
@@ -99,27 +99,27 @@ struct CardDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(NSLocalizedString("edit", comment: "")) {
                     // копируем значения в edit-поля перед открытием редактора
-                    editWord        = card.word
+                    editWord = card.word
                     editTranslation = card.translation
-                    editDefinition  = card.definition
-                    editExample     = card.example
+                    editDefinition = card.definition
+                    editExample = card.example
                     isEditing = true
                 }
             }
         }
         .sheet(isPresented: $isEditing) {
             EditCardSheet(
-                word:        $editWord,
+                word: $editWord,
                 translation: $editTranslation,
-                definition:  $editDefinition,
-                example:     $editExample,
+                definition: $editDefinition,
+                example: $editExample,
                 onSave: {
                     store.update(
                         card,
-                        word:        editWord.trimmingCharacters(in: .whitespaces),
+                        word: editWord.trimmingCharacters(in: .whitespaces),
                         translation: editTranslation.trimmingCharacters(in: .whitespaces),
-                        definition:  editDefinition.trimmingCharacters(in: .whitespaces),
-                        example:     editExample.trimmingCharacters(in: .whitespaces)
+                        definition: editDefinition.trimmingCharacters(in: .whitespaces),
+                        example: editExample.trimmingCharacters(in: .whitespaces)
                     )
                     isEditing = false
                 },
@@ -129,7 +129,7 @@ struct CardDetailView: View {
     }
 }
 
-// MARK: - Лист редактирования
+// лист редактирования
 struct EditCardSheet: View {
     @Binding var word: String
     @Binding var translation: String
