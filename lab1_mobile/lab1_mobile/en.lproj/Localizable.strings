@@ -28,6 +28,7 @@
 "cancel" = "Cancel";
 "save" = "Save";
 "edit" = "Edit";
+"done" = "Done";
 
 /* Detail view */
 "label_word" = "Word";
@@ -42,11 +43,44 @@
 "theme_system" = "System";
 "theme_light" = "Light";
 "theme_dark" = "Dark";
+"settings_notifications" = "Notifications";
+"notifications_daily" = "Daily reminder";
+"notifications_time" = "Reminder time";
 "settings_about" = "About";
 "about_app" = "Application";
 "about_version" = "Version";
+
+/* Account (ЛР4) */
+"settings_account" = "Account";
+"account_email" = "Email";
+"account_logout" = "Log out";
+"account_logout_confirm" = "Log out";
+"account_logout_message" = "Are you sure you want to log out?";
+
+/* Auth */
+"auth_login" = "Sign in";
+"auth_register" = "Register";
+"auth_email" = "Email";
+"auth_password" = "Password";
 
 /* Network */
 "offline_mode" = "Offline";
 "offline_no_cache" = "No internet and no cached data for this word";
 "lookup_loading" = "Looking up...";
+
+/* Sort & Filter */
+"sort_title" = "Sort by";
+"sort_date_desc" = "Newest first";
+"sort_date_asc" = "Oldest first";
+"sort_word_az" = "Word A → Z";
+"sort_word_za" = "Word Z → A";
+"filter_title" = "Filter";
+"filter_all" = "All cards";
+"filter_learned" = "Learned";
+"filter_not" = "Not learned";
+"filter_reset" = "Reset";
+"filter_sheet_title" = "Sort & Filter";
+
+/* Notifications */
+"notification_title" = "FlashWords";
+"notification_body" = "Time to learn new words! 📚";

@@ -28,6 +28,7 @@
 "cancel" = "Отмена";
 "save" = "Сохранить";
 "edit" = "Редактировать";
+"done" = "Готово";
 
 /* Detail view */
 "label_word" = "Слово";
@@ -42,11 +43,44 @@
 "theme_system" = "Системная";
 "theme_light" = "Светлая";
 "theme_dark" = "Тёмная";
+"settings_notifications" = "Уведомления";
+"notifications_daily" = "Ежедневное напоминание";
+"notifications_time" = "Время напоминания";
 "settings_about" = "О приложении";
 "about_app" = "Приложение";
 "about_version" = "Версия";
+
+/* Account (ЛР4) */
+"settings_account" = "Аккаунт";
+"account_email" = "Email";
+"account_logout" = "Выйти из аккаунта";
+"account_logout_confirm" = "Выйти";
+"account_logout_message" = "Вы уверены что хотите выйти?";
+
+/* Auth */
+"auth_login" = "Войти";
+"auth_register" = "Регистрация";
+"auth_email" = "Email";
+"auth_password" = "Пароль";
 
 /* Network */
 "offline_mode" = "Офлайн";
 "offline_no_cache" = "Нет интернета и кэша для этого слова";
 "lookup_loading" = "Ищем...";
+
+/* Sort & Filter */
+"sort_title" = "Сортировка";
+"sort_date_desc" = "Новые сначала";
+"sort_date_asc" = "Старые сначала";
+"sort_word_az" = "Слово А → Я";
+"sort_word_za" = "Слово Я → А";
+"filter_title" = "Фильтр";
+"filter_all" = "Все карточки";
+"filter_learned" = "Выученные";
+"filter_not" = "Не выученные";
+"filter_reset" = "Сбросить";
+"filter_sheet_title" = "Сортировка и фильтр";
+
+/* Notifications */
+"notification_title" = "FlashWords";
+"notification_body" = "Время учить новые слова! 📚";

@@ -1,12 +1,12 @@
 //https://dictionaryapi.dev — транскрипция и definition
-//https://translate.googleapis.com — перевод на русский через Google Translate (без ключа)
+//https://translate.googleapis.com — перевод на русский через Google Translate
 
 import Foundation
 
 // из чего состоит результат поиска
 struct DictionaryResult {
     let definition: String  // английское определение
-    let phonetic: String    // транскрипция /kæt/
+    let phonetic: String    // транскрипция 
     let translation: String // перевод на русский
 }
 

@@ -2,7 +2,6 @@
 import Foundation
 import Combine
 
-// синглтончик
 class CardStore: ObservableObject {
     static let shared = CardStore()
 
@@ -14,14 +13,16 @@ class CardStore: ObservableObject {
         load()
     }
 
-    // добавляем карточку передаем и definition
+    // добавляем карточку — локально и в Firestore
     func add(word: String, translation: String, definition: String = "", example: String = "") {
         let card = WordCard(word: word, translation: translation, definition: definition, example: example)
         cards.insert(card, at: 0)
         save()
+        // сохраняем в Firestore асинхронно — не блокируем UI
+        Task { await FirestoreService.shared.save(card) }
     }
 
-    // обновляем карточку тоже с definition
+    // обновляем карточку — тоже с definition
     func update(_ card: WordCard, word: String, translation: String, definition: String, example: String) {
         card.word = word
         card.translation = translation
@@ -29,22 +30,29 @@ class CardStore: ObservableObject {
         card.example = example
         objectWillChange.send()
         save()
+        Task { await FirestoreService.shared.save(card) }
     }
 
     func toggleLearned(_ card: WordCard) {
         card.isLearned.toggle()
         objectWillChange.send()
         save()
+        Task { await FirestoreService.shared.save(card) }
     }
 
     func delete(at offsets: IndexSet) {
+        let toDelete = offsets.map { cards[$0] }
         cards.remove(atOffsets: offsets)
         save()
+        toDelete.forEach { card in
+            Task { await FirestoreService.shared.delete(card) }
+        }
     }
 
     func delete(card: WordCard) {
         cards.removeAll { $0.id == card.id }
         save()
+        Task { await FirestoreService.shared.delete(card) }
     }
 
     // сохраняю в json
